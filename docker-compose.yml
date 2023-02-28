@@ -1,0 +1,25 @@
+version: '3.6'
+
+services:
+
+  stress-test-spring-boot:
+    container_name: stress-test-spring-boot
+    build:
+      context: stress-test-spring-boot
+      dockerfile: Dockerfile
+    image: stress-test-spring-boot:latest
+    depends_on:
+      - mongodb
+    ports:
+      - '127.0.0.1:8081:8081'
+
+  mongodb:
+    image: mongo:5.0
+    container_name: stress_test_mongodb
+    restart: always
+    ports:
+      - 27017:27017
+    volumes:
+      - ./mongo/data:/data/db
+
+
